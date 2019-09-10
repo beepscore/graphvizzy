@@ -60,7 +60,35 @@ def draw_graph2(out_file_name):
         f_out.write(A.string())
 
 
+def draw_graph3(out_file_name):
+    """
+    """
+
+    # init empty graph
+    A = pgv.AGraph()
+    A.node_attr['fontname'] = 'helvetica'
+    A.node_attr['shape'] = 'box'
+
+    items = ["aarvark", "bull", "cheetah", "dog", "emu", "frog", "gopher", "hippo", "ibex", "javelina", "kangaroo"]
+
+    previous_item = None
+
+    for item in items:
+        A.add_node(item)
+        if previous_item is not None:
+            A.add_edge(previous_item, item)
+
+    # make a subgraph with rank='same'
+    B = A.add_subgraph(["bull", "emu", "gopher"], name='cluster1', rank='same')
+    B.graph_attr['rank']='same'
+
+    # write
+    with open(out_file_name, 'w') as f_out:
+        f_out.write(A.string())
+
+
 if __name__ == '__main__':
 
     # draw_graph('./data/g.dot')
-    draw_graph2('./data/g2.dot')
+    # draw_graph2('./data/g2.dot')
+    draw_graph3('./data/g3.dot')
