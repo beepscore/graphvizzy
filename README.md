@@ -1,5 +1,5 @@
 # Purpose
-Use Python, pygraphviz, and graphviz to draw a graph.
+Use Python, pygraphviz, graphviz and dot to draw a graph.
 
 # References
 
