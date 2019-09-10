@@ -69,7 +69,7 @@ def draw_graph3(out_file_name):
     A.node_attr['fontname'] = 'helvetica'
     A.node_attr['shape'] = 'box'
 
-    items = ["aarvark", "bull", "cheetah", "dog", "emu", "frog", "gopher", "hippo", "ibex", "javelina", "kangaroo"]
+    items = ["aardvark", "bull", "cheetah", "dog", "emu", "frog", "gopher", "hippo", "ibex", "javelina", "kangaroo"]
 
     previous_item = None
 
