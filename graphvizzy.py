@@ -76,6 +76,7 @@ def draw_graph3(out_file_name):
     for item in items:
         A.add_node(item)
         if previous_item is not None:
+            # TODO: fix edges not showing. Need to use a directed graph?
             A.add_edge(previous_item, item)
 
     # make a subgraph with rank='same'
