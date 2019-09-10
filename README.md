@@ -11,6 +11,13 @@ https://graphviz.gitlab.io/_pages/doc/info/command.html
 
 # Results
 
+## install pygraphviz
+I used Anaconda
+
+## run script
+
+    python graphvizzy.py
+
 ## dot command
 
     dot -Tpng g.dot -o g.png
