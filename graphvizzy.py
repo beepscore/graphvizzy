@@ -44,25 +44,40 @@ def draw_graph2(out_file_name):
     A.node_attr['fontname'] = 'helvetica'
     A.node_attr['shape'] = 'box'
 
-    items = ["aardvark", "bull", "cheetah", "dog", "emu", "frog", "gopher", "hippo", "ibex", "javelina", "kangaroo"]
+    A.add_node("aardvark")
 
-    previous_item = None
+    items0 = ["bull", "cheetah", "dog"]
+    items1 = ["emu", "frog", "gopher"]
+    items2 = ["hippo", "ibex", "javelina", "kangaroo"]
 
-    for item in items:
-        A.add_node(item)
-        if previous_item is not None:
-            # TODO: fix edges not showing. Need to use a directed graph?
-            A.add_edge(previous_item, item)
-
-        previous_item = item
+    add_nodes_and_connect(A, items0)
+    add_nodes_and_connect(A, items1)
+    add_nodes_and_connect(A, items2)
 
     # make a subgraph with rank='same'
-    B = A.add_subgraph(["bull", "emu", "gopher"], name='cluster1', rank='same')
-    B.graph_attr['rank']='same'
+    B = A.add_subgraph(items0, name='cluster0', rank='same')
+    B.graph_attr['rank'] = 'same'
+
+    B = A.add_subgraph(items1, name='cluster1', rank='same')
+    B.graph_attr['rank'] = 'same'
+
+    B = A.add_subgraph(items2, name='cluster2', rank='same')
+    B.graph_attr['rank'] = 'same'
 
     # write
     with open(out_file_name, 'w') as f_out:
         f_out.write(A.string())
+
+
+def add_nodes_and_connect(graph, items):
+    previous_item = None
+
+    for item in items:
+        graph.add_node(item)
+        if previous_item is not None:
+            graph.add_edge(previous_item, item)
+
+        previous_item = item
 
 
 if __name__ == '__main__':
