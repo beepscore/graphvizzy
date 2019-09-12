@@ -65,7 +65,7 @@ def draw_graph3(out_file_name):
     """
 
     # init empty graph
-    A = pgv.AGraph()
+    A = pgv.AGraph(directed=True)
     A.node_attr['fontname'] = 'helvetica'
     A.node_attr['shape'] = 'box'
 
