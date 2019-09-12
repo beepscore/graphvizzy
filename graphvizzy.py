@@ -49,10 +49,12 @@ def draw_graph2(out_file_name):
     items0 = ["coyote", "dingo", "dog", "fox", "jackal", "wolf"]
     items1 = ["cat", "lion", "tiger"]
     items2 = ["hippo", "ibex", "javelina", "kangaroo"]
+    items3 = ["horse", "zebra", "donkey"]
 
     add_nodes_and_connect(A, items0)
     add_nodes_and_connect(A, items1)
     add_nodes_and_connect(A, items2)
+
 
     B = A.add_subgraph(items0, name='cluster0', label='canids', rank='same')
 
@@ -65,6 +67,10 @@ def draw_graph2(out_file_name):
     B = A.add_subgraph(items2, name='cluster2', label='other', rank='same')
 
     A.add_edge(items1[-1], items2[0], rank='same')
+
+    A.add_nodes_from(items3)
+
+    B = A.add_subgraph(items3, name='cluster3', label='equids', rank='same')
 
     # write .dot file
     with open(out_file_name, 'w') as f_out:
