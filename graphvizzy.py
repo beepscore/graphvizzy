@@ -63,8 +63,6 @@ def draw_graph2(out_file_name):
     A.add_edge(items0[-1], items1[0])
 
     B = A.add_subgraph(items2, name='cluster2', label='other', rank='same')
-    # B = A.add_subgraph(items2, name='cluster2', label='other', rank='same', attrs=[items2[0], items2[1]])
-    # {rank = same; B; D; Y;}
 
     A.add_edge(items1[-1], items2[0], rank='same')
 
