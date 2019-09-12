@@ -79,6 +79,8 @@ def draw_graph3(out_file_name):
             # TODO: fix edges not showing. Need to use a directed graph?
             A.add_edge(previous_item, item)
 
+        previous_item = item
+
     # make a subgraph with rank='same'
     B = A.add_subgraph(["bull", "emu", "gopher"], name='cluster1', rank='same')
     B.graph_attr['rank']='same'
