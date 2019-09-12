@@ -46,24 +46,24 @@ def draw_graph2(out_file_name):
 
     A.add_node("aardvark")
 
-    items0 = ["bull", "cheetah", "dog"]
-    items1 = ["emu", "frog", "gopher"]
+    items0 = ["coyote", "dingo", "dog", "fox", "jackal", "wolf"]
+    items1 = ["cat", "lion", "tiger"]
     items2 = ["hippo", "ibex", "javelina", "kangaroo"]
 
     add_nodes_and_connect(A, items0)
     add_nodes_and_connect(A, items1)
     add_nodes_and_connect(A, items2)
 
-    B = A.add_subgraph(items0, name='cluster0', rank='same')
+    B = A.add_subgraph(items0, name='cluster0', label='canids', rank='same')
     B.graph_attr['rank'] = 'same'
 
     A.add_edge("aardvark", items0[0])
 
-    B = A.add_subgraph(items1, name='cluster1')
+    B = A.add_subgraph(items1, name='cluster1', label='felines')
 
     A.add_edge(items0[-1], items1[0])
 
-    B = A.add_subgraph(items2, name='cluster2', rank='same')
+    B = A.add_subgraph(items2, name='cluster2', label='other', rank='same')
 
     A.add_edge(items1[-1], items2[0])
 
