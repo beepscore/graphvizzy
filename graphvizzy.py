@@ -54,15 +54,16 @@ def draw_graph2(out_file_name):
     add_nodes_and_connect(A, items1)
     add_nodes_and_connect(A, items2)
 
-    # make a subgraph with rank='same'
     B = A.add_subgraph(items0, name='cluster0', rank='same')
     B.graph_attr['rank'] = 'same'
 
-    B = A.add_subgraph(items1, name='cluster1', rank='same')
-    B.graph_attr['rank'] = 'same'
+    A.add_edge("aardvark", items0[0])
+
+    B = A.add_subgraph(items1, name='cluster1')
+
+    A.add_edge(items0[-1], items1[0])
 
     B = A.add_subgraph(items2, name='cluster2', rank='same')
-    B.graph_attr['rank'] = 'same'
 
     # write
     with open(out_file_name, 'w') as f_out:
