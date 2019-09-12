@@ -55,7 +55,6 @@ def draw_graph2(out_file_name):
     add_nodes_and_connect(A, items2)
 
     B = A.add_subgraph(items0, name='cluster0', label='canids', rank='same')
-    B.graph_attr['rank'] = 'same'
 
     A.add_edge("aardvark", items0[0])
 
@@ -64,10 +63,12 @@ def draw_graph2(out_file_name):
     A.add_edge(items0[-1], items1[0])
 
     B = A.add_subgraph(items2, name='cluster2', label='other', rank='same')
+    # B = A.add_subgraph(items2, name='cluster2', label='other', rank='same', attrs=[items2[0], items2[1]])
+    # {rank = same; B; D; Y;}
 
-    A.add_edge(items1[-1], items2[0])
+    A.add_edge(items1[-1], items2[0], rank='same')
 
-    # write
+    # write .dot file
     with open(out_file_name, 'w') as f_out:
         f_out.write(A.string())
 
@@ -78,7 +79,7 @@ def add_nodes_and_connect(graph, items):
     for item in items:
         graph.add_node(item)
         if previous_item is not None:
-            graph.add_edge(previous_item, item)
+            graph.add_edge(previous_item, item, rank='same', constraint=False)
 
         previous_item = item
 
