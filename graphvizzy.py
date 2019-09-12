@@ -79,6 +79,8 @@ def add_nodes_and_connect(graph, items):
     for item in items:
         graph.add_node(item)
         if previous_item is not None:
+            # Use constraint=False to keep rank same
+            # https://stackoverflow.com/questions/22756929/graphviz-make-edges-not-affecting-the-hierarchy-of-nodes
             graph.add_edge(previous_item, item, rank='same', constraint=False)
 
         previous_item = item
