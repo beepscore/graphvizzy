@@ -79,7 +79,8 @@ def draw_graph3(out_file_name):
 
     items0 = ["coyote", "wolf"]
     items1 = ["lion", "tiger"]
-    items2 = ["horse", "zebra"]
+    items2 = ["mouse", "rat"]
+    items3 = ["horse", "zebra"]
 
     # add nodes, not connected by edges. These appear at same level
     A.add_nodes_from(items0)
@@ -87,8 +88,9 @@ def draw_graph3(out_file_name):
     # add nodes connected by edges
     add_nodes_connected_by_edges(graph=A, items=items1, rank_same=False)
     add_nodes_connected_by_edges(graph=A, items=items2, rank_same=True)
+    add_nodes_connected_by_edges(graph=A, items=items3, rank_same=True)
 
-    B = A.add_subgraph(items2, name='cluster2', label='equids')
+    B = A.add_subgraph(items3, name='cluster3', label='equids')
 
     # write .dot file
     with open(out_file_name, 'w') as f_out:
