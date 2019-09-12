@@ -5,8 +5,6 @@ import pygraphviz as pgv
 
 
 def draw_graph(out_file_name):
-    """
-    """
 
     # init empty graph
     A = pgv.AGraph()
@@ -51,10 +49,9 @@ def draw_graph2(out_file_name):
     items2 = ["hippo", "ibex", "javelina", "kangaroo"]
     items3 = ["horse", "zebra", "donkey"]
 
-    add_nodes_and_connect(A, items0)
-    add_nodes_and_connect(A, items1)
-    add_nodes_and_connect(A, items2)
-
+    add_nodes_connected_by_edges(A, items0)
+    add_nodes_connected_by_edges(A, items1)
+    add_nodes_connected_by_edges(A, items2)
 
     B = A.add_subgraph(items0, name='cluster0', label='canids', rank='same')
 
@@ -77,7 +74,34 @@ def draw_graph2(out_file_name):
         f_out.write(A.string())
 
 
-def add_nodes_and_connect(graph, items):
+def draw_graph3(out_file_name):
+    A = pgv.AGraph(directed=True)
+
+    items0 = ["coyote", "wolf"]
+    items1 = ["lion", "tiger"]
+    items2 = ["horse", "zebra"]
+
+    # add nodes, not connected by edges. These appear at same level
+    A.add_nodes_from(items0)
+
+    # add nodes connected by edges
+    add_nodes_connected_by_edges(graph=A, items=items1, rank_same=False)
+    add_nodes_connected_by_edges(graph=A, items=items2, rank_same=True)
+
+    B = A.add_subgraph(items2, name='cluster2', label='equids')
+
+    # write .dot file
+    with open(out_file_name, 'w') as f_out:
+        f_out.write(A.string())
+
+
+def add_nodes_connected_by_edges(graph, items, rank_same):
+    """
+    Adds nodes to graph, one node per string in items
+    :param graph: a pygraphviz graph
+    :param items: a list of strings
+    :param rank_same: boolean. True ranks nodes so they appear at same horizontal level
+    """
     previous_item = None
 
     for item in items:
@@ -85,7 +109,7 @@ def add_nodes_and_connect(graph, items):
         if previous_item is not None:
             # Use constraint=False to keep rank same
             # https://stackoverflow.com/questions/22756929/graphviz-make-edges-not-affecting-the-hierarchy-of-nodes
-            graph.add_edge(previous_item, item, rank='same', constraint=False)
+            graph.add_edge(previous_item, item, rank='same', constraint=(not rank_same))
 
         previous_item = item
 
@@ -93,4 +117,5 @@ def add_nodes_and_connect(graph, items):
 if __name__ == '__main__':
 
     # draw_graph('./data/g.dot')
-    draw_graph2('./data/g2.dot')
+    # draw_graph2('./data/g2.dot')
+    draw_graph3('./data/g3.dot')
