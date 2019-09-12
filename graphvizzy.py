@@ -65,6 +65,8 @@ def draw_graph2(out_file_name):
 
     B = A.add_subgraph(items2, name='cluster2', rank='same')
 
+    A.add_edge(items1[-1], items2[0])
+
     # write
     with open(out_file_name, 'w') as f_out:
         f_out.write(A.string())
