@@ -8,6 +8,7 @@ https://github.com/pygraphviz/pygraphviz
 
 ## graphviz
 https://graphviz.gitlab.io/_pages/doc/info/command.html
+https://graphviz.gitlab.io/_pages/doc/info/attrs.html
 
 # Results
 
