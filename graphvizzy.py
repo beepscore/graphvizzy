@@ -49,9 +49,9 @@ def draw_graph2(out_file_name):
     items2 = ["hippo", "ibex", "javelina", "kangaroo"]
     items3 = ["horse", "zebra", "donkey"]
 
-    add_nodes_connected_by_edges(A, items0, True)
-    add_nodes_connected_by_edges(A, items1, True)
-    add_nodes_connected_by_edges(A, items2, True)
+    add_nodes_connected_by_edges(A, items0, False)
+    add_nodes_connected_by_edges(A, items1, False)
+    add_nodes_connected_by_edges(A, items2, False)
 
     B = A.add_subgraph(items0, name='cluster0', label='canids', rank='same')
 
@@ -86,9 +86,9 @@ def draw_graph3(out_file_name):
     A.add_nodes_from(items0)
 
     # add nodes connected by edges
-    add_nodes_connected_by_edges(graph=A, items=items1, rank_same=False)
-    add_nodes_connected_by_edges(graph=A, items=items2, rank_same=True)
-    add_nodes_connected_by_edges(graph=A, items=items3, rank_same=True)
+    add_nodes_connected_by_edges(graph=A, items=items1, constraint=True)
+    add_nodes_connected_by_edges(graph=A, items=items2, constraint=False)
+    add_nodes_connected_by_edges(graph=A, items=items3, constraint=False)
 
     B = A.add_subgraph(items3, name='cluster3', label='equids')
 
@@ -97,12 +97,12 @@ def draw_graph3(out_file_name):
         f_out.write(A.string())
 
 
-def add_nodes_connected_by_edges(graph: pgv.AGraph, items: [str], rank_same: bool) -> pgv.AGraph:
+def add_nodes_connected_by_edges(graph: pgv.AGraph, items: [str], constraint: bool) -> pgv.AGraph:
     """
     Adds nodes to graph, one node per string in items
     :param graph: a pygraphviz graph
     :param items: a list of strings
-    :param rank_same: boolean. True ranks nodes so they appear at same horizontal level
+    :param constraint: if False, the edge is not used in ranking the nodes
     """
     previous_item = None
 
