@@ -49,9 +49,9 @@ def draw_graph2(out_file_name):
     items2 = ["hippo", "ibex", "javelina", "kangaroo"]
     items3 = ["horse", "zebra", "donkey"]
 
-    add_nodes_connected_by_edges(A, items0)
-    add_nodes_connected_by_edges(A, items1)
-    add_nodes_connected_by_edges(A, items2)
+    add_nodes_connected_by_edges(A, items0, True)
+    add_nodes_connected_by_edges(A, items1, True)
+    add_nodes_connected_by_edges(A, items2, True)
 
     B = A.add_subgraph(items0, name='cluster0', label='canids', rank='same')
 
