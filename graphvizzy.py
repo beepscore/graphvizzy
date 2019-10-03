@@ -10,13 +10,13 @@ def draw_graph(out_file_name):
     A = pgv.AGraph()
 
     # set some default node attributes
-    A.node_attr['style']='filled'
-    A.node_attr['shape']='circle'
+    A.node_attr['style'] = 'filled'
+    A.node_attr['shape'] = 'circle'
 
     # Add edges (and nodes)
-    A.add_edge(1,2)
-    A.add_edge(2,3)
-    A.add_edge(1,3)
+    A.add_edge(1, 2)
+    A.add_edge(2, 3)
+    A.add_edge(1, 3)
 
     # layout with default (neato)
     A.layout()
