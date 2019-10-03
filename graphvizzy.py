@@ -7,29 +7,29 @@ import pygraphviz as pgv
 def draw_graph(out_file_name):
 
     # init empty graph
-    A = pgv.AGraph()
+    a = pgv.AGraph()
 
     # set some default node attributes
-    A.node_attr['style'] = 'filled'
-    A.node_attr['shape'] = 'circle'
+    a.node_attr['style'] = 'filled'
+    a.node_attr['shape'] = 'circle'
 
     # Add edges (and nodes)
-    A.add_edge(1, 2)
-    A.add_edge(2, 3)
-    A.add_edge(1, 3)
+    a.add_edge(1, 2)
+    a.add_edge(2, 3)
+    a.add_edge(1, 3)
 
     # layout with default (neato)
-    A.layout()
+    a.layout()
 
     # draw png
-    png = A.draw(format='png')
+    png = a.draw(format='png')
 
     # print dot file to standard output
     # print(A.string())
 
     # write
     with open(out_file_name, 'w') as f_out:
-        f_out.write(A.string())
+        f_out.write(a.string())
 
 
 def draw_graph2(out_file_name):
@@ -38,44 +38,44 @@ def draw_graph2(out_file_name):
     """
 
     # init empty graph
-    A = pgv.AGraph(directed=True)
-    A.node_attr['fontname'] = 'helvetica'
-    A.node_attr['shape'] = 'box'
+    a = pgv.AGraph(directed=True)
+    a.node_attr['fontname'] = 'helvetica'
+    a.node_attr['shape'] = 'box'
 
-    A.add_node("aardvark")
+    a.add_node("aardvark")
 
     items0 = ["coyote", "dingo", "dog", "fox", "jackal", "wolf"]
     items1 = ["cat", "lion", "tiger"]
     items2 = ["hippo", "ibex", "javelina", "kangaroo"]
     items3 = ["horse", "zebra", "donkey"]
 
-    add_nodes_connected_by_edges(A, items0, False)
-    add_nodes_connected_by_edges(A, items1, False)
-    add_nodes_connected_by_edges(A, items2, False)
+    add_nodes_connected_by_edges(a, items0, False)
+    add_nodes_connected_by_edges(a, items1, False)
+    add_nodes_connected_by_edges(a, items2, False)
 
-    B = A.add_subgraph(items0, name='cluster0', label='canids', rank='same')
+    b = a.add_subgraph(items0, name='cluster0', label='canids', rank='same')
 
-    A.add_edge("aardvark", items0[0])
+    a.add_edge("aardvark", items0[0])
 
-    B = A.add_subgraph(items1, name='cluster1', label='felines')
+    b = a.add_subgraph(items1, name='cluster1', label='felines')
 
-    A.add_edge(items0[-1], items1[0])
+    a.add_edge(items0[-1], items1[0])
 
-    B = A.add_subgraph(items2, name='cluster2', label='other', rank='same')
+    b = a.add_subgraph(items2, name='cluster2', label='other', rank='same')
 
-    A.add_edge(items1[-1], items2[0], rank='same')
+    a.add_edge(items1[-1], items2[0], rank='same')
 
-    A.add_nodes_from(items3)
+    a.add_nodes_from(items3)
 
-    B = A.add_subgraph(items3, name='cluster3', label='equids', rank='same')
+    b = a.add_subgraph(items3, name='cluster3', label='equids', rank='same')
 
     # write .dot file
     with open(out_file_name, 'w') as f_out:
-        f_out.write(A.string())
+        f_out.write(a.string())
 
 
 def draw_graph3(out_file_name):
-    A = pgv.AGraph(directed=True)
+    a = pgv.AGraph(directed=True)
 
     items0 = ["coyote", "wolf"]
     items1 = ["lion", "tiger"]
@@ -83,18 +83,18 @@ def draw_graph3(out_file_name):
     items3 = ["horse", "zebra"]
 
     # add nodes, not connected by edges. These appear at same level
-    A.add_nodes_from(items0)
+    a.add_nodes_from(items0)
 
     # add nodes connected by edges
-    add_nodes_connected_by_edges(graph=A, items=items1, constraint=True)
-    add_nodes_connected_by_edges(graph=A, items=items2, constraint=False)
-    add_nodes_connected_by_edges(graph=A, items=items3, constraint=False)
+    add_nodes_connected_by_edges(graph=a, items=items1, constraint=True)
+    add_nodes_connected_by_edges(graph=a, items=items2, constraint=False)
+    add_nodes_connected_by_edges(graph=a, items=items3, constraint=False)
 
-    B = A.add_subgraph(items3, name='cluster3', label='equids')
+    b = a.add_subgraph(items3, name='cluster3', label='equids')
 
     # write .dot file
     with open(out_file_name, 'w') as f_out:
-        f_out.write(A.string())
+        f_out.write(a.string())
 
 
 def add_nodes_connected_by_edges(graph: pgv.AGraph, items: [str], constraint: bool) -> pgv.AGraph:
