@@ -15,6 +15,8 @@ https://graphviz.gitlab.io/_pages/doc/info/attrs.html
 ## install pygraphviz
 I used Anaconda
 
+    conda activate beepscore_data_science
+
 ## run script
 
     python graphvizzy.py
