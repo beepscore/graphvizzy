@@ -97,7 +97,7 @@ def draw_graph3(out_file_name):
         f_out.write(A.string())
 
 
-def add_nodes_connected_by_edges(graph, items, rank_same):
+def add_nodes_connected_by_edges(graph: pgv.AGraph, items: [str], rank_same: bool) -> pgv.AGraph:
     """
     Adds nodes to graph, one node per string in items
     :param graph: a pygraphviz graph
