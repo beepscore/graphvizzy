@@ -109,10 +109,12 @@ def add_nodes_connected_by_edges(graph: pgv.AGraph, items: [str], rank_same: boo
     for item in items:
         graph.add_node(item)
         if previous_item is not None:
-            # constraint: if false, the edge is not used in ranking the nodes
+            # rank: If rank="same", all nodes are placed on the same rank.
+            # https://graphviz.gitlab.io/_pages/doc/info/attrs.html#d:rank
+            # constraint: If False, the edge is not used in ranking the nodes.
             # https://stackoverflow.com/questions/22756929/graphviz-make-edges-not-affecting-the-hierarchy-of-nodes
             # https://graphviz.gitlab.io/_pages/doc/info/attrs.html#d:constraint
-            graph.add_edge(previous_item, item, rank='same', constraint=(not rank_same))
+            graph.add_edge(previous_item, item, rank='same', constraint=constraint)
 
         previous_item = item
 
